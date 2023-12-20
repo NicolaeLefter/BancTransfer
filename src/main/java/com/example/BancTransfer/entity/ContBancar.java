@@ -2,7 +2,9 @@ package com.example.BancTransfer.entity;
 
 import jakarta.persistence.*;
 
-@Entity
+import java.util.Objects;
+
+@Entity(name = "cont_bancar")
 public class ContBancar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +18,33 @@ public class ContBancar {
     private Double balance;
     @Column(name = "id_person")
     private Integer idPerson;
+
+    public ContBancar(){
+
+    }
+
+    public ContBancar(Integer idCont){
+        this.idCont = idCont;
+    }
+
+    public ContBancar(Integer  idCont, String currency){
+        this.idCont = idCont;
+        this.currency = currency;
+    }
+
+    public ContBancar(Integer idCont, String currency, Double balance, Integer idPerson) {
+        this.idCont = idCont;
+        this.currency = currency;
+        this.balance = balance;
+        this.idPerson = idPerson;
+    }
+
+    public ContBancar(String currency, Double balance, Integer idPerson) {
+
+        this.currency = currency;
+        this.balance = balance;
+        this.idPerson = idPerson;
+    }
 
     public Integer getIdCont() {
         return idCont;
@@ -57,5 +86,17 @@ public class ContBancar {
                 ", balance=" + balance +
                 ", idPerson=" + idPerson +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ContBancar that)) return false;
+        return Objects.equals(idCont, that.idCont) && Objects.equals(currency, that.currency) && Objects.equals(balance, that.balance) && Objects.equals(idPerson, that.idPerson);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCont, currency, balance, idPerson);
     }
 }

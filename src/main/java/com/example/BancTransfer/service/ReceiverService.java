@@ -1,6 +1,7 @@
 package com.example.BancTransfer.service;
 
 import com.example.BancTransfer.entity.ContBancar;
+import com.example.BancTransfer.exception.BalanceNegativException;
 import com.example.BancTransfer.repository.ContBancarRepository;
 import com.example.BancTransfer.transferDTO.Valuta;
 import jakarta.transaction.Transactional;
@@ -14,9 +15,13 @@ public class ReceiverService {
 
     ContBancarRepository contBancarRepository;
     @Transactional
-    public ResponseEntity<Object> receiverPerson(Integer idReceiver, Double amount, Valuta valuta){
+    public ResponseEntity<Object> receiverPerson(Integer idReceiver, Double amount, Valuta valuta)  {
         ContBancar contBancar = contBancarRepository.findByIdPersonAndCurrency(idReceiver,valuta.name());
-        contBancar.setBalance(contBancar.getBalance() + amount);
+
+
+            contBancar.setBalance(contBancar.getBalance() + amount);
+
+
         return ResponseEntity.ok("Ati primit un transfer in valoare de: " + amount);
     }
 }

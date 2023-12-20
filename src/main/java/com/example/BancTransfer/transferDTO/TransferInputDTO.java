@@ -13,6 +13,13 @@ public class TransferInputDTO {
         return valuta;
     }
 
+    public TransferInputDTO(Integer idSender, Integer idReceiver, Double amount, Valuta valuta) {
+        this.idSender = idSender;
+        this.idReceiver = idReceiver;
+        this.amount = amount;
+        this.valuta = valuta;
+    }
+
     public void setValuta(Valuta valuta) {
         this.valuta = valuta;
     }

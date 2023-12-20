@@ -1,6 +1,7 @@
 package com.example.BancTransfer.controller;
 
 import com.example.BancTransfer.entity.ContBancar;
+import com.example.BancTransfer.exception.BalanceNegativException;
 import com.example.BancTransfer.exception.ContBancarNotFoundException;
 import com.example.BancTransfer.repository.ContBancarRepository;
 import com.example.BancTransfer.service.TransferService;
@@ -36,7 +37,7 @@ public class ContBancarController {
        return ResponseEntity.status(HttpStatus.OK).body(transferService.deleteContById(idCont));
     }
     @PutMapping("transferMoney")
-    public ResponseEntity<Object> transferMoney(@RequestBody TransferInputDTO transferInputDTO){
+    public ResponseEntity<Object> transferMoney(@RequestBody TransferInputDTO transferInputDTO) throws BalanceNegativException {
        return ResponseEntity.status(HttpStatus.OK).body(transferService.transferMoney(transferInputDTO));
     }
     @GetMapping("/get/all")
@@ -46,6 +47,10 @@ public class ContBancarController {
     @DeleteMapping("/delete/{idCont}")
     public void deleteCont(@PathVariable Integer idCont){
        contBancarRepository.deleteById(idCont);
+    }
+    @PutMapping("/update/{idCont}")
+    public ResponseEntity<Object> updateCont(@RequestBody ContBancar contBancar, @PathVariable Integer idCont) throws ContBancarNotFoundException {
+       return ResponseEntity.status(HttpStatus.OK).body(transferService.updateContBancar(contBancar,idCont));
     }
 
 
