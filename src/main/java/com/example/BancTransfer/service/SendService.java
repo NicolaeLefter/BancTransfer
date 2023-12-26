@@ -1,5 +1,6 @@
 package com.example.BancTransfer.service;
 
+import com.example.BancTransfer.controller.exersari.ServiceSum;
 import com.example.BancTransfer.entity.ContBancar;
 import com.example.BancTransfer.exception.BalanceNegativException;
 import com.example.BancTransfer.repository.ContBancarRepository;
@@ -7,8 +8,6 @@ import com.example.BancTransfer.transferDTO.Valuta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
